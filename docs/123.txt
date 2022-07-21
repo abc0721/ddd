@@ -1,0 +1,21 @@
+项目工具：https://vuepress.vuejs.org/zh/
+
+
+
+写作预览：
+
+yarn docs:dev
+
+打包发布：
+
+yarn docs:build
+
+
+上传代码：source_commit.sh
+
+部署网站到github：deploy.sh
+
+静态资源路径：build\.vuepress\dist
+
+网站配置：\docs\.vuepress\config.js
+
