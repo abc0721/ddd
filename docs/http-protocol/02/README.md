@@ -7,3 +7,5 @@
 - [05 | 常说的四层和七层到底是什么？五层、六层哪去了？](./05.md)
 - [06 | 域名里有哪些门道？](./06.md)
 - [07 | 自己动手，搭建 HTTP 实验环境](./07.md)
+
+<iframe  height="500px" width="100%" frameborder=0 allowfullscreen="true" :src="$withBase('/ads.html')"></iframe>

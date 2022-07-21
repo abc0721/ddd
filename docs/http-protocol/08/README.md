@@ -240,3 +240,6 @@ DNS 解析域名会耗费不少的时间，如果网站拥有多个域名，那�
 - Nginx 默认不支持 br 压缩算法，需要安裝一个第三方模块 ngx_broth。
 - 文本、图片的优化可以使用 Google 开发的个工具: PageSpeed，它最初是 Apache 的个模块，后来也推出了 Nginx 版本(ngx_ pagespeed)。
 - 在 HTML 里可以使用一些特殊的指令，例如 dns- prefetch、 preconnect 等，来预先执行 DNS 解析、TCP 连接,減少客户端的等待时间。此外，还可以使用一些 JS 黑魔法，用 JavaScript 来动态下载页面内容，而不是完全使用 HTTP 协议。
+
+
+<iframe  height="500px" width="100%" frameborder=0 allowfullscreen="true" :src="$withBase('/ads.html')"></iframe>

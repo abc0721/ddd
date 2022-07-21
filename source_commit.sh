@@ -8,6 +8,6 @@ git add -A
 git commit -m 'commit'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:abc0721/learn-book.git master:main
+git push -f git@github.com:abc0721/learn-book.git main
 
 cd -

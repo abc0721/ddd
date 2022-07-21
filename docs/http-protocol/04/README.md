@@ -8,3 +8,5 @@
 - [06 | 生鲜速递：HTTP 的缓存控制](./06.md)
 - [07 | 良心中间商：HTTP 的代理服务](./07.md)
 - [08 | 冷链周转：HTTP 的缓存代理](./08.md)
+
+<iframe  height="500px" width="100%" frameborder=0 allowfullscreen="true" :src="$withBase('/ads.html')"></iframe>

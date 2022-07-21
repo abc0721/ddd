@@ -4,6 +4,13 @@ const dddSc = require('../ddd')
 
 module.exports = {
   // ~ 开发配置
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@alias': 'docs/statics'
+      }
+    }
+  },
   dest: 'build/.vuepress/dist',  // 目录配置在外,纯粹是有代码洁癖和强迫症，并不能规避开发模式下同时构建不报错的问题
   host: 'localhost', // dev 的域名
   port: 8080,
@@ -37,11 +44,11 @@ module.exports = {
     // 假如文档不是放在仓库的根目录下：
     docsDir: 'docs',
     // 假如文档放在一个特定的分支下：
-    docsBranch: 'man',
+    docsBranch: 'main',
     // 默认是 false, 设置为 true 来启用
     editLinks: true,
     // 默认为 "Edit this page"
-    editLinkText: '帮助我们改善此页面！',
+    // editLinkText: '帮助我们改善此页面！',
     logo: '/mlogo.svg',
     // 主题级别的配置
     serviceWorker: {
