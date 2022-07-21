@@ -1,0 +1,23 @@
+{
+  "name": "learn-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abc0721/learn-book.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abc0721/learn-book/issues"
+  },
+  "homepage": "https://github.com/abc0721/learn-book#readme",
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  }
+}
