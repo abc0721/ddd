@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>02 | 把大象装进冰箱：HTTP 传输大文件的方法 | LEARN-BOOK</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/learn-book/favicon.ico">
+    <link rel="manifest" href="/learn-book/manifest.json">
+    <meta name="description" content="note-book 的第二分仓笔记仓库">
+    
+    <link rel="preload" href="/learn-book/assets/css/0.styles.d1598957.css" as="style"><link rel="preload" href="/learn-book/assets/js/app.028ed7df.js" as="script"><link rel="preload" href="/learn-book/assets/js/2.21223788.js" as="script"><link rel="preload" href="/learn-book/assets/js/17.467198e5.js" as="script"><link rel="preload" href="/learn-book/assets/js/83.ec5af474.js" as="script"><link rel="prefetch" href="/learn-book/assets/js/10.ae9ef0d5.js"><link rel="prefetch" href="/learn-book/assets/js/100.e2686a94.js"><link rel="prefetch" href="/learn-book/assets/js/101.1e48f558.js"><link rel="prefetch" href="/learn-book/assets/js/102.2b0aead0.js"><link rel="prefetch" href="/learn-book/assets/js/103.36a9d0c5.js"><link rel="prefetch" href="/learn-book/assets/js/104.940c0889.js"><link rel="prefetch" href="/learn-book/assets/js/105.4059f322.js"><link rel="prefetch" href="/learn-book/assets/js/106.258dd171.js"><link rel="prefetch" href="/learn-book/assets/js/107.dc32950f.js"><link rel="prefetch" href="/learn-book/assets/js/108.f96a8dee.js"><link rel="prefetch" href="/learn-book/assets/js/109.ba4b933c.js"><link rel="prefetch" href="/learn-book/assets/js/11.a08a42ea.js"><link rel="prefetch" href="/learn-book/assets/js/110.3035f734.js"><link rel="prefetch" href="/learn-book/assets/js/111.fa05b698.js"><link rel="prefetch" href="/learn-book/assets/js/112.bbb150f0.js"><link rel="prefetch" href="/learn-book/assets/js/113.1263dcc6.js"><link rel="prefetch" href="/learn-book/assets/js/114.82285aec.js"><link rel="prefetch" href="/learn-book/assets/js/115.7509736a.js"><link rel="prefetch" href="/learn-book/assets/js/116.f57394f2.js"><link rel="prefetch" href="/learn-book/assets/js/117.9f37dd43.js"><link rel="prefetch" href="/learn-book/assets/js/118.73b62d5e.js"><link rel="prefetch" href="/learn-book/assets/js/119.ccc80315.js"><link rel="prefetch" href="/learn-book/assets/js/12.40792829.js"><link rel="prefetch" href="/learn-book/assets/js/120.0feeb1b4.js"><link rel="prefetch" href="/learn-book/assets/js/121.7bbdbedc.js"><link rel="prefetch" href="/learn-book/assets/js/122.f239e92d.js"><link rel="prefetch" href="/learn-book/assets/js/123.430e5350.js"><link rel="prefetch" href="/learn-book/assets/js/124.4a74a756.js"><link rel="prefetch" href="/learn-book/assets/js/125.9d441c34.js"><link rel="prefetch" href="/learn-book/assets/js/126.97b348bf.js"><link rel="prefetch" href="/learn-book/assets/js/127.85743ce6.js"><link rel="prefetch" href="/learn-book/assets/js/128.133b2151.js"><link rel="prefetch" href="/learn-book/assets/js/129.91eacdb7.js"><link rel="prefetch" href="/learn-book/assets/js/13.65102ef7.js"><link rel="prefetch" href="/learn-book/assets/js/130.00470fe8.js"><link rel="prefetch" href="/learn-book/assets/js/131.181aef24.js"><link rel="prefetch" href="/learn-book/assets/js/132.4166cdea.js"><link rel="prefetch" href="/learn-book/assets/js/133.ec5b9acc.js"><link rel="prefetch" href="/learn-book/assets/js/134.0c928687.js"><link rel="prefetch" href="/learn-book/assets/js/135.0b49f1c2.js"><link rel="prefetch" href="/learn-book/assets/js/136.be67ae82.js"><link rel="prefetch" href="/learn-book/assets/js/137.6f85ad05.js"><link rel="prefetch" href="/learn-book/assets/js/138.b3fa2ba7.js"><link rel="prefetch" href="/learn-book/assets/js/139.abf8672e.js"><link rel="prefetch" href="/learn-book/assets/js/14.4813a349.js"><link rel="prefetch" href="/learn-book/assets/js/140.d03ed1c1.js"><link rel="prefetch" href="/learn-book/assets/js/141.da6ec0e4.js"><link rel="prefetch" href="/learn-book/assets/js/142.09aed130.js"><link rel="prefetch" href="/learn-book/assets/js/143.4cffc3e5.js"><link rel="prefetch" href="/learn-book/assets/js/144.224499c6.js"><link rel="prefetch" href="/learn-book/assets/js/145.0268dd0e.js"><link rel="prefetch" href="/learn-book/assets/js/146.f0d0970e.js"><link rel="prefetch" href="/learn-book/assets/js/147.4a203a56.js"><link rel="prefetch" href="/learn-book/assets/js/148.3b084bf3.js"><link rel="prefetch" href="/learn-book/assets/js/149.d42b82bd.js"><link rel="prefetch" href="/learn-book/assets/js/15.ca243d77.js"><link rel="prefetch" href="/learn-book/assets/js/150.30cad9c9.js"><link rel="prefetch" href="/learn-book/assets/js/151.a27ba2c5.js"><link rel="prefetch" href="/learn-book/assets/js/152.8e388b90.js"><link rel="prefetch" href="/learn-book/assets/js/153.380f332c.js"><link rel="prefetch" href="/learn-book/assets/js/154.163b241b.js"><link rel="prefetch" href="/learn-book/assets/js/155.dacd37a6.js"><link rel="prefetch" href="/learn-book/assets/js/156.9296f4c8.js"><link rel="prefetch" href="/learn-book/assets/js/157.0c12b4ce.js"><link rel="prefetch" href="/learn-book/assets/js/158.79e7656c.js"><link rel="prefetch" href="/learn-book/assets/js/159.02749d11.js"><link rel="prefetch" href="/learn-book/assets/js/16.22ac0778.js"><link rel="prefetch" href="/learn-book/assets/js/160.3efbd6a0.js"><link rel="prefetch" href="/learn-book/assets/js/161.11e17eb7.js"><link rel="prefetch" href="/learn-book/assets/js/162.ed81bb49.js"><link rel="prefetch" href="/learn-book/assets/js/163.c321ec8d.js"><link rel="prefetch" href="/learn-book/assets/js/164.6831a594.js"><link rel="prefetch" href="/learn-book/assets/js/165.9e13a7e1.js"><link rel="prefetch" href="/learn-book/assets/js/166.20287335.js"><link rel="prefetch" href="/learn-book/assets/js/167.06fe0883.js"><link rel="prefetch" href="/learn-book/assets/js/168.574a5d34.js"><link rel="prefetch" href="/learn-book/assets/js/169.78d54345.js"><link rel="prefetch" href="/learn-book/assets/js/170.a8a8c838.js"><link rel="prefetch" href="/learn-book/assets/js/171.bce5528f.js"><link rel="prefetch" href="/learn-book/assets/js/172.6d122eaf.js"><link rel="prefetch" href="/learn-book/assets/js/173.b7b1734b.js"><link rel="prefetch" href="/learn-book/assets/js/174.0c5ddece.js"><link rel="prefetch" href="/learn-book/assets/js/175.fcb3bb1e.js"><link rel="prefetch" href="/learn-book/assets/js/176.4c8b6c1b.js"><link rel="prefetch" href="/learn-book/assets/js/177.2c821a10.js"><link rel="prefetch" href="/learn-book/assets/js/178.4b938acb.js"><link rel="prefetch" href="/learn-book/assets/js/179.e5a3f9d5.js"><link rel="prefetch" href="/learn-book/assets/js/18.2c2655d3.js"><link rel="prefetch" href="/learn-book/assets/js/180.e075e24a.js"><link rel="prefetch" href="/learn-book/assets/js/181.a8659308.js"><link rel="prefetch" href="/learn-book/assets/js/182.e02e157b.js"><link rel="prefetch" href="/learn-book/assets/js/183.fec3be72.js"><link rel="prefetch" href="/learn-book/assets/js/184.06841422.js"><link rel="prefetch" href="/learn-book/assets/js/185.967d47f7.js"><link rel="prefetch" href="/learn-book/assets/js/186.b27543eb.js"><link rel="prefetch" href="/learn-book/assets/js/187.0ab43110.js"><link rel="prefetch" href="/learn-book/assets/js/188.d2c20c41.js"><link rel="prefetch" href="/learn-book/assets/js/189.e50ac920.js"><link rel="prefetch" href="/learn-book/assets/js/19.87356261.js"><link rel="prefetch" href="/learn-book/assets/js/190.0bcce66f.js"><link rel="prefetch" href="/learn-book/assets/js/191.1a3d3266.js"><link rel="prefetch" href="/learn-book/assets/js/192.b46f1f92.js"><link rel="prefetch" href="/learn-book/assets/js/193.7cd9a2e2.js"><link rel="prefetch" href="/learn-book/assets/js/194.c7cac8f4.js"><link rel="prefetch" href="/learn-book/assets/js/195.76b36b43.js"><link rel="prefetch" href="/learn-book/assets/js/196.9ad5f9de.js"><link rel="prefetch" href="/learn-book/assets/js/197.2914f34f.js"><link rel="prefetch" href="/learn-book/assets/js/198.2e2c2c64.js"><link rel="prefetch" href="/learn-book/assets/js/199.0d8fc29e.js"><link rel="prefetch" href="/learn-book/assets/js/20.8693e977.js"><link rel="prefetch" href="/learn-book/assets/js/200.2bc59ffe.js"><link rel="prefetch" href="/learn-book/assets/js/201.6765dba2.js"><link rel="prefetch" href="/learn-book/assets/js/202.d19062c8.js"><link rel="prefetch" href="/learn-book/assets/js/203.270e8e72.js"><link rel="prefetch" href="/learn-book/assets/js/204.0ecf2cd8.js"><link rel="prefetch" href="/learn-book/assets/js/205.b241dd2b.js"><link rel="prefetch" href="/learn-book/assets/js/206.3d555da2.js"><link rel="prefetch" href="/learn-book/assets/js/207.b88d10dc.js"><link rel="prefetch" href="/learn-book/assets/js/208.d15b9895.js"><link rel="prefetch" href="/learn-book/assets/js/209.404964dd.js"><link rel="prefetch" href="/learn-book/assets/js/21.ce55ac2d.js"><link rel="prefetch" href="/learn-book/assets/js/210.8a6ad39b.js"><link rel="prefetch" href="/learn-book/assets/js/211.9f828903.js"><link rel="prefetch" href="/learn-book/assets/js/212.ecdb6c3d.js"><link rel="prefetch" href="/learn-book/assets/js/213.093b4b7f.js"><link rel="prefetch" href="/learn-book/assets/js/214.17e91916.js"><link rel="prefetch" href="/learn-book/assets/js/215.8f7b103b.js"><link rel="prefetch" href="/learn-book/assets/js/216.5a4cb55c.js"><link rel="prefetch" href="/learn-book/assets/js/217.850e8745.js"><link rel="prefetch" href="/learn-book/assets/js/218.b8913e63.js"><link rel="prefetch" href="/learn-book/assets/js/219.3260d54b.js"><link rel="prefetch" href="/learn-book/assets/js/22.2a565240.js"><link rel="prefetch" href="/learn-book/assets/js/220.6e440719.js"><link rel="prefetch" href="/learn-book/assets/js/221.ed0a4a3e.js"><link rel="prefetch" href="/learn-book/assets/js/222.ab1bbc7e.js"><link rel="prefetch" href="/learn-book/assets/js/223.b8d3fbb0.js"><link rel="prefetch" href="/learn-book/assets/js/224.eba39f96.js"><link rel="prefetch" href="/learn-book/assets/js/225.ba57ac7b.js"><link rel="prefetch" href="/learn-book/assets/js/226.760b4caf.js"><link rel="prefetch" href="/learn-book/assets/js/227.ff81b1ba.js"><link rel="prefetch" href="/learn-book/assets/js/228.15305fd8.js"><link rel="prefetch" href="/learn-book/assets/js/229.b1f93d41.js"><link rel="prefetch" href="/learn-book/assets/js/23.e4419686.js"><link rel="prefetch" href="/learn-book/assets/js/230.982e5c6c.js"><link rel="prefetch" href="/learn-book/assets/js/231.8ac0560e.js"><link rel="prefetch" href="/learn-book/assets/js/232.32eb3205.js"><link rel="prefetch" href="/learn-book/assets/js/233.cb14ad35.js"><link rel="prefetch" href="/learn-book/assets/js/234.0e3fb631.js"><link rel="prefetch" href="/learn-book/assets/js/235.1d7db823.js"><link rel="prefetch" href="/learn-book/assets/js/236.56df2b30.js"><link rel="prefetch" href="/learn-book/assets/js/237.56902777.js"><link rel="prefetch" href="/learn-book/assets/js/238.077f8961.js"><link rel="prefetch" href="/learn-book/assets/js/239.836f2633.js"><link rel="prefetch" href="/learn-book/assets/js/24.4ef60a35.js"><link rel="prefetch" href="/learn-book/assets/js/240.1958dc97.js"><link rel="prefetch" href="/learn-book/assets/js/241.628723f2.js"><link rel="prefetch" href="/learn-book/assets/js/242.80a9054d.js"><link rel="prefetch" href="/learn-book/assets/js/243.59d79e44.js"><link rel="prefetch" href="/learn-book/assets/js/244.d3442a00.js"><link rel="prefetch" href="/learn-book/assets/js/245.df290ae1.js"><link rel="prefetch" href="/learn-book/assets/js/246.bb4eb062.js"><link rel="prefetch" href="/learn-book/assets/js/247.c1cbe04d.js"><link rel="prefetch" href="/learn-book/assets/js/248.920787b0.js"><link rel="prefetch" href="/learn-book/assets/js/249.7ab19c67.js"><link rel="prefetch" href="/learn-book/assets/js/25.2b3311b7.js"><link rel="prefetch" href="/learn-book/assets/js/250.eacfb6a8.js"><link rel="prefetch" href="/learn-book/assets/js/251.44eb2a6b.js"><link rel="prefetch" href="/learn-book/assets/js/252.5af941db.js"><link rel="prefetch" href="/learn-book/assets/js/253.1d016c96.js"><link rel="prefetch" href="/learn-book/assets/js/254.3a6ec810.js"><link rel="prefetch" href="/learn-book/assets/js/255.77db8369.js"><link rel="prefetch" href="/learn-book/assets/js/256.a7b36739.js"><link rel="prefetch" href="/learn-book/assets/js/257.cffe71a4.js"><link rel="prefetch" href="/learn-book/assets/js/258.fdb4c219.js"><link rel="prefetch" href="/learn-book/assets/js/259.455a0c8b.js"><link rel="prefetch" href="/learn-book/assets/js/26.70973cf8.js"><link rel="prefetch" href="/learn-book/assets/js/260.f7d47a3e.js"><link rel="prefetch" href="/learn-book/assets/js/261.b1e2a5bf.js"><link rel="prefetch" href="/learn-book/assets/js/262.aaa755c2.js"><link rel="prefetch" href="/learn-book/assets/js/263.e838a513.js"><link rel="prefetch" href="/learn-book/assets/js/264.b8733c83.js"><link rel="prefetch" href="/learn-book/assets/js/265.c5fdd3c5.js"><link rel="prefetch" href="/learn-book/assets/js/266.e8d01769.js"><link rel="prefetch" href="/learn-book/assets/js/267.c9742e28.js"><link rel="prefetch" href="/learn-book/assets/js/268.2b148bef.js"><link rel="prefetch" href="/learn-book/assets/js/269.e03565b0.js"><link rel="prefetch" href="/learn-book/assets/js/27.8106f1e9.js"><link rel="prefetch" href="/learn-book/assets/js/270.65b5d908.js"><link rel="prefetch" href="/learn-book/assets/js/271.fbde0cac.js"><link rel="prefetch" href="/learn-book/assets/js/272.03745530.js"><link rel="prefetch" href="/learn-book/assets/js/273.8785fc29.js"><link rel="prefetch" href="/learn-book/assets/js/274.0ff015ae.js"><link rel="prefetch" href="/learn-book/assets/js/275.4fe4ba23.js"><link rel="prefetch" href="/learn-book/assets/js/276.26d537d4.js"><link rel="prefetch" href="/learn-book/assets/js/277.d95836c7.js"><link rel="prefetch" href="/learn-book/assets/js/278.eb312d49.js"><link rel="prefetch" href="/learn-book/assets/js/279.d0ce3bfd.js"><link rel="prefetch" href="/learn-book/assets/js/28.b3ebf8e6.js"><link rel="prefetch" href="/learn-book/assets/js/280.0c7ddd76.js"><link rel="prefetch" href="/learn-book/assets/js/281.94b40ca5.js"><link rel="prefetch" href="/learn-book/assets/js/282.4f902cb2.js"><link rel="prefetch" href="/learn-book/assets/js/283.834f65b2.js"><link rel="prefetch" href="/learn-book/assets/js/284.283c48cf.js"><link rel="prefetch" href="/learn-book/assets/js/285.4c68b9f5.js"><link rel="prefetch" href="/learn-book/assets/js/286.c34e142a.js"><link rel="prefetch" href="/learn-book/assets/js/287.b6713fe5.js"><link rel="prefetch" href="/learn-book/assets/js/288.cac84ba9.js"><link rel="prefetch" href="/learn-book/assets/js/289.9a6f3ebc.js"><link rel="prefetch" href="/learn-book/assets/js/29.e196143d.js"><link rel="prefetch" href="/learn-book/assets/js/290.fe2f74e5.js"><link rel="prefetch" href="/learn-book/assets/js/291.23dc1b91.js"><link rel="prefetch" href="/learn-book/assets/js/292.80606528.js"><link rel="prefetch" href="/learn-book/assets/js/293.aa013666.js"><link rel="prefetch" href="/learn-book/assets/js/294.0dee2576.js"><link rel="prefetch" href="/learn-book/assets/js/295.c731059a.js"><link rel="prefetch" href="/learn-book/assets/js/296.b226f176.js"><link rel="prefetch" href="/learn-book/assets/js/297.69f8e024.js"><link rel="prefetch" href="/learn-book/assets/js/298.8d2da06c.js"><link rel="prefetch" href="/learn-book/assets/js/299.e168b956.js"><link rel="prefetch" href="/learn-book/assets/js/3.e9334214.js"><link rel="prefetch" href="/learn-book/assets/js/30.0f44a043.js"><link rel="prefetch" href="/learn-book/assets/js/300.335941ee.js"><link rel="prefetch" href="/learn-book/assets/js/301.4bab8322.js"><link rel="prefetch" href="/learn-book/assets/js/302.2f5148b0.js"><link rel="prefetch" href="/learn-book/assets/js/303.2e8d30f0.js"><link rel="prefetch" href="/learn-book/assets/js/304.f0e9bbb8.js"><link rel="prefetch" href="/learn-book/assets/js/305.80fc4688.js"><link rel="prefetch" href="/learn-book/assets/js/306.f554b95c.js"><link rel="prefetch" href="/learn-book/assets/js/307.03aa7e5b.js"><link rel="prefetch" href="/learn-book/assets/js/308.af120a3e.js"><link rel="prefetch" href="/learn-book/assets/js/309.af606132.js"><link rel="prefetch" href="/learn-book/assets/js/31.00dd7380.js"><link rel="prefetch" href="/learn-book/assets/js/310.47599795.js"><link rel="prefetch" href="/learn-book/assets/js/311.00539011.js"><link rel="prefetch" href="/learn-book/assets/js/312.fbc57673.js"><link rel="prefetch" href="/learn-book/assets/js/313.8e8daad4.js"><link rel="prefetch" href="/learn-book/assets/js/314.268dcf0e.js"><link rel="prefetch" href="/learn-book/assets/js/315.aabe7e52.js"><link rel="prefetch" href="/learn-book/assets/js/316.faa4e876.js"><link rel="prefetch" href="/learn-book/assets/js/317.d802eb3f.js"><link rel="prefetch" href="/learn-book/assets/js/318.c262b463.js"><link rel="prefetch" href="/learn-book/assets/js/319.24a8ff4d.js"><link rel="prefetch" href="/learn-book/assets/js/32.7c34bc5e.js"><link rel="prefetch" href="/learn-book/assets/js/320.9c7cda5a.js"><link rel="prefetch" href="/learn-book/assets/js/321.23b9a0be.js"><link rel="prefetch" href="/learn-book/assets/js/322.ad972338.js"><link rel="prefetch" href="/learn-book/assets/js/323.07f13ace.js"><link rel="prefetch" href="/learn-book/assets/js/324.18b8d5ae.js"><link rel="prefetch" href="/learn-book/assets/js/325.f01bde16.js"><link rel="prefetch" href="/learn-book/assets/js/326.629c1072.js"><link rel="prefetch" href="/learn-book/assets/js/327.39e6c9e2.js"><link rel="prefetch" href="/learn-book/assets/js/328.c699721e.js"><link rel="prefetch" href="/learn-book/assets/js/329.b54ab0db.js"><link rel="prefetch" href="/learn-book/assets/js/33.2386fa0f.js"><link rel="prefetch" href="/learn-book/assets/js/330.79e7cbcf.js"><link rel="prefetch" href="/learn-book/assets/js/331.377fadf6.js"><link rel="prefetch" href="/learn-book/assets/js/332.63cd94c2.js"><link rel="prefetch" href="/learn-book/assets/js/333.da52ece6.js"><link rel="prefetch" href="/learn-book/assets/js/334.5f196b50.js"><link rel="prefetch" href="/learn-book/assets/js/335.97b4ef4c.js"><link rel="prefetch" href="/learn-book/assets/js/336.e57f018e.js"><link rel="prefetch" href="/learn-book/assets/js/337.0a5a0859.js"><link rel="prefetch" href="/learn-book/assets/js/338.7a7f0b61.js"><link rel="prefetch" href="/learn-book/assets/js/339.7cd408bd.js"><link rel="prefetch" href="/learn-book/assets/js/34.0d02a15e.js"><link rel="prefetch" href="/learn-book/assets/js/340.04cb06e8.js"><link rel="prefetch" href="/learn-book/assets/js/341.537861d1.js"><link rel="prefetch" href="/learn-book/assets/js/342.da14f695.js"><link rel="prefetch" href="/learn-book/assets/js/343.74707d52.js"><link rel="prefetch" href="/learn-book/assets/js/344.b350096e.js"><link rel="prefetch" href="/learn-book/assets/js/345.dbf62aca.js"><link rel="prefetch" href="/learn-book/assets/js/346.3f255f50.js"><link rel="prefetch" href="/learn-book/assets/js/347.f4668b0d.js"><link rel="prefetch" href="/learn-book/assets/js/348.542573cc.js"><link rel="prefetch" href="/learn-book/assets/js/349.6888cb35.js"><link rel="prefetch" href="/learn-book/assets/js/35.74523ded.js"><link rel="prefetch" href="/learn-book/assets/js/350.cd705439.js"><link rel="prefetch" href="/learn-book/assets/js/351.093058d4.js"><link rel="prefetch" href="/learn-book/assets/js/352.77230cba.js"><link rel="prefetch" href="/learn-book/assets/js/353.8f883fac.js"><link rel="prefetch" href="/learn-book/assets/js/354.d52aee3e.js"><link rel="prefetch" href="/learn-book/assets/js/355.77a0126a.js"><link rel="prefetch" href="/learn-book/assets/js/356.dbf927e4.js"><link rel="prefetch" href="/learn-book/assets/js/357.0973baa0.js"><link rel="prefetch" href="/learn-book/assets/js/358.cac7fab3.js"><link rel="prefetch" href="/learn-book/assets/js/359.e8330d89.js"><link rel="prefetch" href="/learn-book/assets/js/36.0da2006f.js"><link rel="prefetch" href="/learn-book/assets/js/360.afef7c08.js"><link rel="prefetch" href="/learn-book/assets/js/361.6237f112.js"><link rel="prefetch" href="/learn-book/assets/js/362.34d1483e.js"><link rel="prefetch" href="/learn-book/assets/js/363.b7b45618.js"><link rel="prefetch" href="/learn-book/assets/js/364.e6d9ce62.js"><link rel="prefetch" href="/learn-book/assets/js/37.2fc83856.js"><link rel="prefetch" href="/learn-book/assets/js/38.79be50ee.js"><link rel="prefetch" href="/learn-book/assets/js/39.88a682f8.js"><link rel="prefetch" href="/learn-book/assets/js/4.0c4a4c2a.js"><link rel="prefetch" href="/learn-book/assets/js/40.e29bfa4b.js"><link rel="prefetch" href="/learn-book/assets/js/41.d4016d53.js"><link rel="prefetch" href="/learn-book/assets/js/42.c548ba43.js"><link rel="prefetch" href="/learn-book/assets/js/43.472c0c7f.js"><link rel="prefetch" href="/learn-book/assets/js/44.e0613af7.js"><link rel="prefetch" href="/learn-book/assets/js/45.e0c5b514.js"><link rel="prefetch" href="/learn-book/assets/js/46.0d833848.js"><link rel="prefetch" href="/learn-book/assets/js/47.167e51ca.js"><link rel="prefetch" href="/learn-book/assets/js/48.c55f2d7a.js"><link rel="prefetch" href="/learn-book/assets/js/49.600b0356.js"><link rel="prefetch" href="/learn-book/assets/js/5.c26035a1.js"><link rel="prefetch" href="/learn-book/assets/js/50.70947932.js"><link rel="prefetch" href="/learn-book/assets/js/51.924af1dd.js"><link rel="prefetch" href="/learn-book/assets/js/52.447da1c4.js"><link rel="prefetch" href="/learn-book/assets/js/53.b7e4c782.js"><link rel="prefetch" href="/learn-book/assets/js/54.4d31d080.js"><link rel="prefetch" href="/learn-book/assets/js/55.91a4b03c.js"><link rel="prefetch" href="/learn-book/assets/js/56.1cb7915e.js"><link rel="prefetch" href="/learn-book/assets/js/57.2affe6fc.js"><link rel="prefetch" href="/learn-book/assets/js/58.27d5c7cd.js"><link rel="prefetch" href="/learn-book/assets/js/59.2bd7f911.js"><link rel="prefetch" href="/learn-book/assets/js/6.41833f8f.js"><link rel="prefetch" href="/learn-book/assets/js/60.626def20.js"><link rel="prefetch" href="/learn-book/assets/js/61.45f51e6d.js"><link rel="prefetch" href="/learn-book/assets/js/62.4bdda78c.js"><link rel="prefetch" href="/learn-book/assets/js/63.557bc394.js"><link rel="prefetch" href="/learn-book/assets/js/64.aff699bf.js"><link rel="prefetch" href="/learn-book/assets/js/65.692f7816.js"><link rel="prefetch" href="/learn-book/assets/js/66.25ecbcaa.js"><link rel="prefetch" href="/learn-book/assets/js/67.8fa8a16e.js"><link rel="prefetch" href="/learn-book/assets/js/68.92b6a3f8.js"><link rel="prefetch" href="/learn-book/assets/js/69.efff96d2.js"><link rel="prefetch" href="/learn-book/assets/js/7.8100f2ed.js"><link rel="prefetch" href="/learn-book/assets/js/70.aacd8d45.js"><link rel="prefetch" href="/learn-book/assets/js/71.97a38b91.js"><link rel="prefetch" href="/learn-book/assets/js/72.fa0bbfba.js"><link rel="prefetch" href="/learn-book/assets/js/73.7065bf44.js"><link rel="prefetch" href="/learn-book/assets/js/74.cc9e8786.js"><link rel="prefetch" href="/learn-book/assets/js/75.9853915c.js"><link rel="prefetch" href="/learn-book/assets/js/76.3bb84aff.js"><link rel="prefetch" href="/learn-book/assets/js/77.1d7faa0b.js"><link rel="prefetch" href="/learn-book/assets/js/78.82ccf15d.js"><link rel="prefetch" href="/learn-book/assets/js/79.1ca14563.js"><link rel="prefetch" href="/learn-book/assets/js/8.a6e82c65.js"><link rel="prefetch" href="/learn-book/assets/js/80.009c8d78.js"><link rel="prefetch" href="/learn-book/assets/js/81.7c70581a.js"><link rel="prefetch" href="/learn-book/assets/js/82.25fa4637.js"><link rel="prefetch" href="/learn-book/assets/js/84.9e77b512.js"><link rel="prefetch" href="/learn-book/assets/js/85.bebb4293.js"><link rel="prefetch" href="/learn-book/assets/js/86.5a6fb0e3.js"><link rel="prefetch" href="/learn-book/assets/js/87.5a748d18.js"><link rel="prefetch" href="/learn-book/assets/js/88.17a0f517.js"><link rel="prefetch" href="/learn-book/assets/js/89.22035541.js"><link rel="prefetch" href="/learn-book/assets/js/9.5a3b25cd.js"><link rel="prefetch" href="/learn-book/assets/js/90.3222c7da.js"><link rel="prefetch" href="/learn-book/assets/js/91.4b34da5a.js"><link rel="prefetch" href="/learn-book/assets/js/92.9739a603.js"><link rel="prefetch" href="/learn-book/assets/js/93.38329abe.js"><link rel="prefetch" href="/learn-book/assets/js/94.52432e65.js"><link rel="prefetch" href="/learn-book/assets/js/95.363db7ac.js"><link rel="prefetch" href="/learn-book/assets/js/96.f5e07454.js"><link rel="prefetch" href="/learn-book/assets/js/97.76268626.js"><link rel="prefetch" href="/learn-book/assets/js/98.34e210bb.js"><link rel="prefetch" href="/learn-book/assets/js/99.d3018ce2.js">
+    <link rel="stylesheet" href="/learn-book/assets/css/0.styles.d1598957.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/learn-book/" class="home-link router-link-active"><img src="/learn-book/mlogo.svg" alt="LEARN-BOOK" class="logo"> <span class="site-name can-hide">LEARN-BOOK</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="缓存架构-亿级流量电商详情页系统实战" class="dropdown-title"><span class="title">缓存架构-亿级流量电商详情页系统实战</span> <span class="arrow down"></span></button> <button type="button" aria-label="缓存架构-亿级流量电商详情页系统实战" class="mobile-dropdown-title"><span class="title">缓存架构-亿级流量电商详情页系统实战</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          综合性导航
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/" class="nav-link">
+  全目录导航
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/001-introduce.html" class="nav-link">
+  第一版（001 ~ 123 章）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/124.html" class="nav-link">
+  第二版（124 ~ 195 章）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/121.html" class="nav-link">
+  课程总结（难题与解决方案）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          精彩知识精选
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/redis/007.html" class="nav-link">
+  Redis 篇（redis 企业级集群架构）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/035.html" class="nav-link">
+  多级缓存架构设计
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/040.html" class="nav-link">
+  数据库 + 缓存双写一致性解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/045.html" class="nav-link">
+  缓存维度化拆分解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/051.html" class="nav-link">
+  缓存命中率提升解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/057.html" class="nav-link">
+  缓存并发重建冲突解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/069.html" class="nav-link">
+  缓存预热解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/077.html" class="nav-link">
+  热点缓存自动降级方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/110.html" class="nav-link">
+  缓存雪崩解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/117.html" class="nav-link">
+  缓存穿透解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/119.html" class="nav-link">
+  缓存失效解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/hystrix/084.html" class="nav-link">
+  高可用分布式系统架构设计（hystrix 篇）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/047.html" class="nav-link">
+  spring boot 整合 ehcache
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/storm/062.html" class="nav-link">
+  史上最通俗易懂 Storm 教程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="课程目录" class="dropdown-title"><span class="title">课程目录</span> <span class="arrow down"></span></button> <button type="button" aria-label="课程目录" class="mobile-dropdown-title"><span class="title">课程目录</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/learn-book/monitor-tuning/" class="nav-link">
+  JAVA 生产环境下性能监控与调优详解
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/http-protocol/" class="nav-link router-link-active">
+  透视 HTTP 协议
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/ddd/" class="nav-link">
+  DDD 实战课
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/middle-office/" class="nav-link">
+  说透中台
+</a></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/imocc/design_pattern/" class="nav-link">
+  设计模式（慕课）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/design_pattern/" class="nav-link">
+  研磨设计模式（李兴华）
+</a></li></ul></li></ul></div></div> <a href="https://github.com/abc0721/learn-book" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="缓存架构-亿级流量电商详情页系统实战" class="dropdown-title"><span class="title">缓存架构-亿级流量电商详情页系统实战</span> <span class="arrow down"></span></button> <button type="button" aria-label="缓存架构-亿级流量电商详情页系统实战" class="mobile-dropdown-title"><span class="title">缓存架构-亿级流量电商详情页系统实战</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          综合性导航
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/" class="nav-link">
+  全目录导航
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/001-introduce.html" class="nav-link">
+  第一版（001 ~ 123 章）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/124.html" class="nav-link">
+  第二版（124 ~ 195 章）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/121.html" class="nav-link">
+  课程总结（难题与解决方案）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          精彩知识精选
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/redis/007.html" class="nav-link">
+  Redis 篇（redis 企业级集群架构）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/035.html" class="nav-link">
+  多级缓存架构设计
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/040.html" class="nav-link">
+  数据库 + 缓存双写一致性解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/045.html" class="nav-link">
+  缓存维度化拆分解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/051.html" class="nav-link">
+  缓存命中率提升解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/057.html" class="nav-link">
+  缓存并发重建冲突解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/069.html" class="nav-link">
+  缓存预热解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/077.html" class="nav-link">
+  热点缓存自动降级方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/110.html" class="nav-link">
+  缓存雪崩解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/117.html" class="nav-link">
+  缓存穿透解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/119.html" class="nav-link">
+  缓存失效解决方案
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/hystrix/084.html" class="nav-link">
+  高可用分布式系统架构设计（hystrix 篇）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/047.html" class="nav-link">
+  spring boot 整合 ehcache
+</a></li><li class="dropdown-subitem"><a href="/learn-book/cache-pdp/storm/062.html" class="nav-link">
+  史上最通俗易懂 Storm 教程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="课程目录" class="dropdown-title"><span class="title">课程目录</span> <span class="arrow down"></span></button> <button type="button" aria-label="课程目录" class="mobile-dropdown-title"><span class="title">课程目录</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/learn-book/monitor-tuning/" class="nav-link">
+  JAVA 生产环境下性能监控与调优详解
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/http-protocol/" class="nav-link router-link-active">
+  透视 HTTP 协议
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/ddd/" class="nav-link">
+  DDD 实战课
+</a></li><li class="dropdown-item"><!----> <a href="/learn-book/middle-office/" class="nav-link">
+  说透中台
+</a></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/learn-book/imocc/design_pattern/" class="nav-link">
+  设计模式（慕课）
+</a></li><li class="dropdown-subitem"><a href="/learn-book/design_pattern/" class="nav-link">
+  研磨设计模式（李兴华）
+</a></li></ul></li></ul></div></div> <a href="https://github.com/abc0721/learn-book" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/learn-book/http-protocol/" aria-current="page" class="sidebar-link">透视 HTTP 协议</a></li><li><a href="/learn-book/http-protocol/01/" class="sidebar-link">01 | 开篇: To Be a HTTP Hero</a></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/02/" class="sidebar-heading clickable"><span>02 | 破冰篇</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/03/" class="sidebar-heading clickable"><span>03 | 基础篇</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/04/" class="sidebar-heading clickable router-link-active open"><span>04 | 进阶篇</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/learn-book/http-protocol/04/01.html" class="sidebar-link">01 | 海纳百川：HTTP 的实体数据</a></li><li><a href="/learn-book/http-protocol/04/02.html" aria-current="page" class="active sidebar-link">02 | 把大象装进冰箱：HTTP 传输大文件的方法</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#数据压缩" class="sidebar-link">数据压缩</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#分块传输" class="sidebar-link">分块传输</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#范围请求" class="sidebar-link">范围请求</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#多段数据" class="sidebar-link">多段数据</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#小结" class="sidebar-link">小结</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#课下作业" class="sidebar-link">课下作业</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#课外小贴士" class="sidebar-link">课外小贴士</a></li><li class="sidebar-sub-header"><a href="/learn-book/http-protocol/04/02.html#拓展阅读" class="sidebar-link">拓展阅读</a></li></ul></li><li><a href="/learn-book/http-protocol/04/03.html" class="sidebar-link">03 | 排队也要讲效率：HTTP 的连接管理</a></li><li><a href="/learn-book/http-protocol/04/04.html" class="sidebar-link">04 | 四通八达：HTTP 的重定向和跳转</a></li><li><a href="/learn-book/http-protocol/04/05.html" class="sidebar-link">05 | 让我知道你是谁：HTTP 的 Cookie 机制</a></li><li><a href="/learn-book/http-protocol/04/06.html" class="sidebar-link">06 | 生鲜速递：HTTP 的缓存控制</a></li><li><a href="/learn-book/http-protocol/04/07.html" class="sidebar-link">07 | 良心中间商：HTTP 的代理服务</a></li><li><a href="/learn-book/http-protocol/04/08.html" class="sidebar-link">08 | 冷链周转：HTTP 的缓存代理</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/05/" class="sidebar-heading clickable"><span>05 | 安全篇</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/06/" class="sidebar-heading clickable"><span>06 | 飞翔篇</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/learn-book/http-protocol/07/" class="sidebar-heading clickable"><span>07 | 探索篇</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/learn-book/http-protocol/08/" class="sidebar-link">08 | 总结篇: HTTP 性能优化面面观</a></li><li><a href="/learn-book/http-protocol/09.html" class="sidebar-link">参考资源</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_02-把大象装进冰箱-http-传输大文件的方法"><a href="#_02-把大象装进冰箱-http-传输大文件的方法" class="header-anchor">#</a> 02 | 把大象装进冰箱：HTTP 传输大文件的方法</h1> <p>上次我们谈到了 HTTP 报文里的 body，知道了 HTTP 可以传输很多种类的数据，不仅是文本，也能传输图片、音频和视频。</p> <p>早期互联网上传输的基本上都是只有几 K 大小的文本和小图片，现在的情况则大有不同。网页里包含的信息实在是太多了，随随便便一个主页 HTML 就有可能上百 K，高质量的图片都以 M 论，更不要说那些电影、电视剧了，几 G、几十 G 都有可能。</p> <p>相比之下，100M 的光纤固网或者 4G 移动网络在这些大文件的压力下都变成了 「小水管」，无论是上传还是下载，都会把网络传输链路挤的「满满当当」。</p> <p>所以，<strong>如何在有限的带宽下高效快捷地传输这些大文件就成了一个重要的课题</strong> 。这就好比是已经打开了冰箱门（建立连接），该怎么把大象（文件）塞进去再关上门（完成传输）呢？</p> <p>今天我们就一起看看 HTTP 协议里有哪些手段能解决这个问题。</p> <h2 id="数据压缩"><a href="#数据压缩" class="header-anchor">#</a> 数据压缩</h2> <p>还记得上一讲中说到的 <strong>数据类型与编码</strong> 吗？如果你还有印象的话，肯定能够想到一个最基本的解决方案，那就是 <strong>数据压缩</strong> ，把大象变成小猪佩奇，再放进冰箱。</p> <p>通常浏览器在发送请求时都会带着 <strong>Accept-Encoding</strong> 头字段，里面是 <strong>浏览器支持的压缩格式列表</strong> ，例如 gzip、deflate、br 等，这样服务器就可以从中选择一种压缩算法，放进 <strong>Content-Encoding</strong> 响应头里，再把原数据压缩后发给浏览器。</p> <p>如果压缩率能有 50%，也就是说 100K 的数据能够压缩成 50K 的大小，那么就相当于在带宽不变的情况下网速提升了一倍，加速的效果是非常明显的。</p> <p>不过这个解决方法也有个缺点，gzip 等压缩算法通常只对文本文件有较好的压缩率，而图片、音频视频等多媒体数据本身就已经是高度压缩的，再用 gzip 处理也不会变小（甚至还有可能会增大一点），所以它就失效了。</p> <p>不过数据压缩在处理文本的时候效果还是很好的，所以各大网站的服务器都会使用这个手段作为保底。例如，在 Nginx 里就会使用 <code>gzip on</code> 指令，启用对 <code>text/html</code> 的压缩。</p> <h2 id="分块传输"><a href="#分块传输" class="header-anchor">#</a> 分块传输</h2> <p>在数据压缩之外，还能有什么办法来解决大文件的问题呢？</p> <p>压缩是把大文件整体变小，我们可以反过来思考，如果大文件整体不能变小，那就把它 <strong>拆开</strong> ，分解成多个小块，把这些小块分批发给浏览器，浏览器收到后再组装复原。</p> <p>这样浏览器和服务器都不用在内存里保存文件的全部，每次只收发一小部分，网络也不会被大文件长时间占用，内存、带宽等资源也就节省下来了。</p> <p>这种 <strong>化整为零</strong> 的思路在 HTTP 协议里就是 <strong>chunked</strong> 分块传输编码，在响应报文里用头字段 <strong>Transfer-Encoding: chunked</strong> 来表示，意思是报文里的 body 部分不是一次性发过来的，而是分成了许多的块（chunk）逐个发送。</p> <p>这就好比是用魔法把大象变成乐高积木，拆散了逐个装进冰箱，到达目的地后再施法拼起来满血复活。</p> <p><strong>分块传输也可以用于流式数据</strong> ，例如由数据库动态生成的表单页面，这种情况下 <strong>body 数据的长度是未知的</strong> ，无法在头字段 <strong>Content-Length</strong> 里给出确切的长度，所以也只能用 chunked 方式分块发送。</p> <p><code>Transfer-Encoding: chunked</code> 和 <code>Content-Length</code> 这两个字段是 <strong>互斥的</strong> ，也就是说响应报文里这两个字段不能同时出现，一个响应报文的传输要么是长度已知，要么是长度未知（chunked），这一点你一定要记住。</p> <p>下面我们来看一下分块传输的编码规则，其实也很简单，同样采用了明文的方式，很类似响应头。</p> <ol><li>每个分块包含两个部分，长度头和数据块；</li> <li>长度头是以 CRLF（回车换行，即 <code>\r\n</code> ）结尾的一行明文，用 16 进制数字表示长度；</li> <li>数据块紧跟在长度头后，最后也用 CRLF 结尾，但数据不包含 CRLF；</li> <li>最后用一个长度为 0 的块表示结束，即 <code>0\r\n\r\n</code>。</li></ol> <p>听起来好像有点难懂，看一下图就好理解了：</p> <p><img src="/learn-book/assets/img/25e7b09cf8cb4eaebba42b4598192410.25e7b09c.png" alt="img"></p> <p>实验环境里的 URI <code>/16-1</code> 简单地模拟了分块传输，可以用 Chrome 访问这个地址看一下效果：</p> <p><img src="/learn-book/assets/img/image-20210305192551220.cb9830e5.png" alt="image-20210305192551220"></p> <p>不过浏览器在收到分块传输的数据后会自动按照规则去掉分块编码，重新组装出内容，所以想要看到服务器发出的原始报文形态就得用 Telnet 手工发送请求（或者用 Wireshark 抓包）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>GET /16-1 HTTP/1.1
+Host: www.chrono.com
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>因为 Telnet 只是收到响应报文就完事了，不会解析分块数据，所以可以很清楚地看到响应报文里的 chunked 数据格式：先是一行 16 进制长度，然后是数据，然后再是 16 进制长度和数据，如此重复，最后是 0 长度分块结束。</p> <p><img src="/learn-book/assets/img/66a6d229058c7072ab5b28ef518da302.66a6d229.png" alt="img"></p> <p>通抓包的格式如下</p> <p><img src="/learn-book/assets/img/image-20210305193331910.81a6a996.png" alt="image-20210305193331910"></p> <p>可以简单验证下，响应的包，如下图所示：从响应的快中来看，的确是第二条数据</p> <p><img src="/learn-book/assets/img/image-20210305193408952.daccbe40.png" alt="image-20210305193408952"></p> <p>笔者还是很好奇分块传输后端是如何做的呢？看看对应的 lua 代码</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code><span class="token comment">-- Copyright (C) 2019 by chrono</span>
+
+<span class="token comment">-- chunked</span>
+
+<span class="token comment">--ngx.header['Content-Type'] = 'text/plain'</span>
+<span class="token comment">--ngx.header['Transfer-Encoding'] = 'chunked'</span>
+
+<span class="token keyword">for</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">do</span>
+    ngx<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">'chunked data '</span> <span class="token operator">..</span> i <span class="token operator">..</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
+    ngx<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>可以看到，直接写入 body 中的，然后刷新，对应的具体 java 代码笔者暂时就猜不到了。后续有实战后再来补充说明</p> <h2 id="范围请求"><a href="#范围请求" class="header-anchor">#</a> 范围请求</h2> <p>有了分块传输编码，服务器就可以轻松地收发大文件了，但对于上 G 的超大文件，还有一些问题需要考虑。</p> <p>比如，你在看当下正热播的某穿越剧，想跳过片头，直接看正片，或者有段剧情很无聊，想拖动进度条快进几分钟，<strong>这实际上是想获取一个大文件其中的片段数据</strong> ，而分块传输并没有这个能力。</p> <p>HTTP 协议为了满足这样的需求，提出了 <strong>范围请求</strong> （range requests）的概念，允许客户端在请求头里使用专用字段来表示只获取文件的一部分，相当于是 <strong>客户端的「化整为零</strong>」 。</p> <p>范围请求不是 Web 服务器必备的功能，可以实现也可以不实现，所以服务器必须在响应头里使用字段 <strong>Accept-Ranges: bytes</strong> 明确告知客户端：「我是支持范围请求的」。</p> <p>如果不支持的话该怎么办呢？服务器可以发送 <code>Accept-Ranges: none</code> ，或者干脆不发送 <code>Accept-Ranges</code> 字段，这样客户端就认为服务器没有实现范围请求功能，只能老老实实地收发整块文件了。</p> <p>请求头 <strong>Range</strong> 是 HTTP 范围请求的专用字段，格式是 <strong>bytes=x-y</strong>，其中的 x 和 y 是以字节为单位的数据范围。</p> <p>要注意 x、y 表示的是 <strong>偏移量</strong> ，范围必须从 0 计数，例如前 10 个字节表示为 <code>0-9</code>，第二个 10 字节表示为 <code>10-19</code> ，而 <code>0-10</code> 实际上是前 11 个字节。</p> <p>Range 的格式也很灵活，起点 x 和终点 y 可以省略，能够很方便地表示正数或者倒数的范围。<strong>假设文件是 100 个字节</strong> ，那么：</p> <ul><li><code>0-</code> 表示从文档起点到文档终点，相当于 <code>0-99</code> ，即整个文件；</li> <li><code>10-</code> 是从第 10 个字节开始到文档末尾，相当于 <code>10-99</code>；</li> <li><code>-1</code> 是文档的最后一个字节，相当于 <code>99-99</code> ；</li> <li><code>-10</code> 是从文档末尾倒数 10 个字节，相当于 <code>90-99</code> 。</li></ul> <p>服务器收到 Range 字段后，需要做四件事。</p> <ol><li><p>第一，它必须检查范围是否合法</p> <p>比如文件只有 100 个字节，但请求 <code>200-300</code> ，这就是范围越界了。服务器就会返回状态码 <strong>416</strong>，意思是「你的范围请求有误，我无法处理，请再检查一下」。</p></li> <li><p>第二，如果范围正确，服务器就可以根据 Range 头计算偏移量，读取文件的片段了，返回状态码 <strong>206 Partial Content</strong> ，和 200 的意思差不多，但表示 body 只是原数据的一部分。</p></li> <li><p>第三，服务器要添加一个响应头字段 <strong>Content-Range</strong></p> <p>告诉片段的实际偏移量和资源的总大小，格式是 <strong>bytes x-y/length</strong> ，与 Range 头区别在没有 <code>=</code>，范围后多了总长度。例如，对于 <code>0-10</code> 的范围请求，值就是 <code>bytes 0-10/100</code> 。</p></li> <li><p>最后剩下的就是发送数据了，直接把片段用 TCP 发给客户端，一个范围请求就算是处理完了。</p></li></ol> <p>你可以用实验环境的 URI <code>/16-2</code> 来测试范围请求，它处理的对象是 <code>/mime/a.txt</code> 。不过我们不能用 Chrome 浏览器，因为它没有编辑 HTTP 请求头的功能（这点上不如 Firefox 方便），所以还是要用 Telnet。</p> <p>例如下面的这个请求使用 Range 字段获取了文件的前 32 个字节：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>GET /16-2 HTTP/1.1
+Host: www.chrono.com
+Range: bytes=0-31
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>返回的数据是（去掉了几个无关字段）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>HTTP/1.1 206 Partial Content
+Content-Length: 32
+Accept-Ranges: bytes
+Content-Range: bytes 0-31/96
+ 
+// this is a plain text json doc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>笔者这里还介绍一种工具，idea 的 xx.http 文件功能，</p> <p><img src="/learn-book/assets/img/image-20210306102133840.ea9bec75.png" alt="image-20210306102133840"></p> <p>文件内容如下</p> <div class="language-http line-numbers-mode"><pre class="language-http"><code><span class="token request-line"><span class="token property">GET</span> http://www.chrono.com/16-2 HTTP/1.1</span>
+<span class="token header-name keyword">Host:</span> www.chrono.com
+<span class="token header-name keyword">Range:</span> bytes=0-31
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>通过抓包如下图所示</p> <p><img src="/learn-book/assets/img/image-20210305195213500.438e1a98.png" alt="image-20210305195213500"></p> <p>有了范围请求之后，HTTP 处理大文件就更加轻松了，看视频时可以根据时间点计算出文件的 Range，不用下载整个文件，直接精确获取片段所在的数据内容。</p> <p>不仅看视频的拖拽进度需要范围请求，常用的下载工具里的多段下载、断点续传也是基于它实现的，要点是：</p> <ul><li>先发个 HEAD，看服务器是否支持范围请求，同时获取文件的大小；</li> <li>开 N 个线程，每个线程使用 Range 字段划分出各自负责下载的片段，发请求传输数据；</li> <li>下载意外中断也不怕，不必重头再来一遍，只要根据上次的下载记录，用 Range 请求剩下的那一部分就可以了。</li></ul> <p>后端代码是如何处理的呢？</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code><span class="token comment">-- Copyright (C) 2019 by chrono</span>
+
+<span class="token comment">-- 使用 ngx_http_range_filter_module 模块来处理范围请求</span>
+
+<span class="token keyword">local</span> path <span class="token operator">=</span> <span class="token string">&quot;/mime/a.txt&quot;</span>
+
+<span class="token comment">-- Accept-Ranges: bytes</span>
+<span class="token keyword">if</span> ngx<span class="token punctuation">.</span>var<span class="token punctuation">.</span>http_range <span class="token keyword">then</span>
+    ngx<span class="token punctuation">.</span>header<span class="token punctuation">[</span><span class="token string">'Accept-Ranges'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'bytes'</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">return</span> ngx<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+<span class="token comment">-- 我们自己解析处理范围请求的简单逻辑如下</span>
+
+<span class="token comment">--[==[
+-- 获取 range 头
+local range = ngx.var.http_range
+
+ngx.status = 400
+str = &quot;only test for range request\n&quot;
+
+-- 检查 range header 头部
+if not range then
+    ngx.header['Content-Length'] = #str
+
+    return ngx.print(str)
+end
+--ngx.log(ngx.ERR, &quot;range is: &quot;, range)
+
+str = &quot;range field error\n&quot;
+
+-- 检查 range 格式，bytes 0-10/100
+local m = ngx.re.match(range, [[bytes=(\d+)-(\d+)]], &quot;ijo&quot;)
+--ngx.log(ngx.ERR, &quot;re is: &quot;, m[0] or 'no re')
+if not m then
+    ngx.header['Content-Length'] = #str
+    return ngx.print(str)
+end
+
+-- 获取 a-b 中的 a 和 b； 0-10
+local start_pos = tonumber(m[1])
+local end_pos = tonumber(m[2])
+
+-- 这两个值必须存在
+if not start_pos or not end_pos or
+   start_pos &gt; end_pos then
+
+    ngx.header['Content-Length'] = #str
+    return ngx.print(str)
+end
+
+-- 计算要给出的文件大小（当次请求需要给出的块大小）
+local range_num = end_pos - start_pos + 1
+--local fake_content_length = range_num + 500
+
+ngx.status = 416
+str = &quot;range too huge for test\n&quot;
+
+if range_num &gt; 1000 then
+    ngx.header['Content-Length'] = #str
+    return ngx.print(str)
+end
+
+ngx.status = 206    -- partial content
+ngx.header['Accept-Range'] = 'bytes'
+ngx.header['Content-Range'] = 'bytes ' ..
+                              start_pos ..
+                              '-' ..
+                              end_pos ..
+                              '/' ..
+                              range_num + 500
+
+str = 'data:' .. string.rep('x', range_num - 5)
+ngx.header['Content-Length'] = #str
+
+ngx.print(str)
+--]==]</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br></div></div><p>笔者对 lua 代码也不是特别的熟悉，可以看懂部分代码，上面给出了注释，下面再总结下该代码的主要处理流程如下（不包含检查边界逻辑）：</p> <ol><li>获取 <code>Range: bytes=0-31</code> 头中的范围， 0 和 31</li> <li>计算出当次要给出的文件大小，也就是 31- 0 + 1，将文件按照此偏移量，截取出二进制数据（此例中，应该是用字符串?）放入 body 中</li> <li>计算文件的总大小</li> <li>写响应头
+<ul><li>状态：HTTP/1.1 206 Partial Content</li> <li>此次 body 的内容大小：Content-Length: 32</li> <li>响应客户端支持范围请求：Accept-Ranges: bytes</li> <li>响应此次给出的文件偏移量和总大小：Content-Range: bytes 0-31/96</li></ul></li></ol> <h2 id="多段数据"><a href="#多段数据" class="header-anchor">#</a> 多段数据</h2> <p>刚才说的范围请求一次只获取一个片段，其实它还支持在 Range 头里使用多个 <code>x-y</code>，一次性获取多个片段数据。</p> <p>这种情况需要使用一种特殊的 MIME 类型：<strong>multipart/byteranges</strong>，表示报文的 body 是由多段字节序列组成的，并且还要用一个参数 <strong>boundary=xxx</strong> 给出段之间的分隔标记。</p> <p>多段数据的格式与分块传输也比较类似，但它需要用分隔标记 boundary 来区分不同的片段，可以通过图来对比一下。</p> <p><img src="/learn-book/assets/img/fffa3a65e367c496428f3c0c4dac8a37.fffa3a65.png" alt="img"></p> <p>每一个分段必须以 <code>--boundary</code> 开始（前面加两个 <code>-</code> ），之后要用 <code>Content-Type</code> 和 <code>Content-Range</code> 标记这段数据的类型和所在范围，然后就像普通的响应头一样以回车换行结束，再加上分段数据，最后用一个 <code>--boundary- -</code>（前后各有两个 <code>-</code>）表示所有的分段结束。</p> <p>例如，我们在实验环境里用 Telnet 发出有两个范围的请求：</p> <div class="language-http line-numbers-mode"><pre class="language-http"><code><span class="token request-line"><span class="token property">GET</span> /16-2 HTTP/1.1</span>
+<span class="token header-name keyword">Host:</span> www.chrono.com
+<span class="token header-name keyword">Range:</span> bytes=0-9, 20-29
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>得到的结果是下面这样</p> <div class="language-http line-numbers-mode"><pre class="language-http"><code><span class="token response-status">HTTP/1.1 <span class="token property">206 Partial Content</span></span>
+<span class="token header-name keyword">Content-Type:</span> multipart/byteranges; boundary=00000000001
+<span class="token header-name keyword">Content-Length:</span> 189
+<span class="token header-name keyword">Connection:</span> keep-alive
+<span class="token header-name keyword">Accept-Ranges:</span> bytes
+ 
+ 
+--00000000001
+<span class="token header-name keyword">Content-Type:</span> text/plain
+<span class="token header-name keyword">Content-Range:</span> bytes 0-9/96
+ 
+// this is
+--00000000001
+<span class="token header-name keyword">Content-Type:</span> text/plain
+<span class="token header-name keyword">Content-Range:</span> bytes 20-29/96
+ 
+ext json d
+--00000000001--
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>报文里的 <code>--00000000001</code> 就是多段的分隔符，使用它客户端就可以很容易地区分出多段 Range 数据。</p> <p>这块代码的后端代码是上面范围请求里面的代码，它使用了 ngx_http_range_filter_module 来处理该请求，如果要自己处理也如同上面讲解的那样将数据拼接好即可。</p> <h2 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h2> <p>今天我们学习了 HTTP 传输大文件相关的知识，在这里做一下简单小结：</p> <ol><li>压缩 HTML 等文本文件是传输大文件最基本的方法；</li> <li>分块传输可以流式收发数据，节约内存和带宽，使用响应头字段 <code>Transfer-Encoding: chunked</code> 来表示，分块的格式是 16 进制长度头 + 数据块；</li> <li>范围请求可以只获取部分数据，即 <strong>分块请求</strong>，实现视频拖拽或者断点续传，使用请求头字段 <code>Range</code> 和响应头字段 <code>Content-Range</code> ，响应状态码必须是 206；</li> <li>也可以一次请求多个范围，这时候响应报文的数据类型是 <code>multipart/byteranges</code> ，body 里的多个部分会用 boundary 字符串分隔。</li></ol> <p>要注意这四种方法不是互斥的，而是可以混合起来使用，例如压缩后再分块传输，或者分段后再分块，实验环境的 URI <code>/16-3</code> 就模拟了后一种的情形，你可以自己用 Telnet 试一下。</p> <div class="language-http line-numbers-mode"><pre class="language-http"><code><span class="token request-line"><span class="token property">GET</span> http://www.chrono.com/16-3 HTTP/1.1</span>
+<span class="token header-name keyword">Host:</span> www.chrono.com
+<span class="token header-name keyword">Range:</span> bytes=0-9, 20-29
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>响应如下</p> <div class="language-http line-numbers-mode"><pre class="language-http"><code>GET http://www.chrono.com/16-3
+
+<span class="token response-status">HTTP/1.1 <span class="token property">200 OK</span></span>
+<span class="token header-name keyword">Server:</span> openresty/1.15.8.1
+<span class="token header-name keyword">Date:</span> Sat, 06 Mar 2021 01:55:17 GMT
+<span class="token header-name keyword">Content-Type:</span> multipart/byteranges; boundary=xyz
+<span class="token header-name keyword">Transfer-Encoding:</span> chunked				// 这里使用了 chunked 分开 和 范围请求
+<span class="token header-name keyword">Connection:</span> keep-alive
+<span class="token header-name keyword">Accept-Ranges:</span> bytes
+
+--xyz
+<span class="token header-name keyword">Content-Type:</span> text/plain
+<span class="token header-name keyword">Content-Range:</span> bytes 0-9/90
+
+// this is
+--xyz
+<span class="token header-name keyword">Content-Type:</span> text/plain
+<span class="token header-name keyword">Content-Range:</span> bytes 20-29/90
+
+ext json d
+--xyz--
+
+
+Response code: 200 (OK); Time: 133ms; Content length: 152 bytes
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>后端代码实现</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code><span class="token comment">-- Copyright (C) 2019 by chrono</span>
+
+<span class="token comment">-- chunked range</span>
+
+<span class="token comment">--[[
+GET /16-2 HTTP/1.1
+Host: www.chrono.com
+Range: bytes=0-9, 20-29
+
+--xyz
+Content-Type: text/plain
+Content-Range: bytes 0-9/90
+
+// this is
+--xyz
+Content-Type: text/plain
+Content-Range: bytes 20-29/90
+
+ext json d
+--xyz--
+--]]</span>
+
+<span class="token comment">--ngx.header['Content-Type'] = 'text/plain'</span>
+<span class="token comment">--ngx.header['Transfer-Encoding'] = 'chunked'</span>
+
+<span class="token comment">-- 响应支持范围请求</span>
+ngx<span class="token punctuation">.</span>header<span class="token punctuation">[</span><span class="token string">'Accept-Ranges'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'bytes'</span>
+<span class="token comment">-- 分段响应</span>
+ngx<span class="token punctuation">.</span>header<span class="token punctuation">[</span><span class="token string">'Content-Type'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'multipart/byteranges; boundary=xyz'</span>
+
+<span class="token comment">-- 模拟 multipart 响应</span>
+<span class="token keyword">local</span> strs <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token comment">-- 1st part</span>
+<span class="token string">[[
+--xyz
+Content-Type: text/plain
+Content-Range: bytes 0-9/90
+
+// this is
+]]</span><span class="token punctuation">,</span>
+
+<span class="token comment">-- 2nd part</span>
+<span class="token string">[[
+--xyz
+Content-Type: text/plain
+Content-Range: bytes 20-29/90
+
+ext json d
+]]</span><span class="token punctuation">,</span>
+
+<span class="token comment">-- last part</span>
+<span class="token string">[[
+--xyz--
+]]</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">-- flush for chunked</span>
+<span class="token keyword">for</span> _<span class="token punctuation">,</span>v <span class="token keyword">in</span> <span class="token function">ipairs</span><span class="token punctuation">(</span>strs<span class="token punctuation">)</span> <span class="token keyword">do</span>
+    ngx<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    ngx<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br></div></div><h2 id="课下作业"><a href="#课下作业" class="header-anchor">#</a> 课下作业</h2> <ol><li><p>分块传输数据的时候，如果数据里含有回车换行（<code>\r\n</code>）是否会影响分块的处理呢？</p> <p>由于分块响应时，报文结构给出了当前块的数据长度，所以不影响</p></li> <li><p>如果对一个被 gzip 的文件执行范围请求，比如 <code>Range: bytes=10-19</code> ，那么这个范围是应用于原文件还是压缩后的文件呢？</p> <p>记住一个规则：<strong>range 是针对原文件的</strong></p></li></ol> <h2 id="课外小贴士"><a href="#课外小贴士" class="header-anchor">#</a> 课外小贴士</h2> <ul><li>gzip 的压缩率通常能够超过 60%，而 br 算法是专门为 HTML 设计的，压缩效率和性能比 gzip 还要好，能够再提高 20% 的压缩密度</li> <li>Nginx 的 <code>gzip on</code> 指令很智能，只会压缩文本数据，不会压缩图片、音频、视频</li> <li><code>Transfer-Encoding</code> 字段最常见的值是 chunked，但也可以用 gzip、deflate 等，表示传输时使用了压缩编码。注意这与 <code>Content-Encoding</code> 不同，<code>Transfer-Encoding</code> 在传输后会被自动解码还原出原始数据，而 <code>Content-Encoding</code> 则必须由应用自行解码</li> <li>分块传输在末尾还允许有 「拖尾数据」，由响应字段 Trailer 指定</li> <li>与 Range 有关的还有一个 <code>If-Range</code> ，即条件范围请求，将在后续章节讲解</li></ul> <h2 id="拓展阅读"><a href="#拓展阅读" class="header-anchor">#</a> 拓展阅读</h2> <ul><li><p>http 交给 tcp 进行传输的时候本来就会分块，那 http 分块的意义是什么呢？</p> <p>在 http 层是看不到 tcp 的，它不知道下层协议是否会分块，下层是否分块对它来说没有意义，不关心。</p> <p>在 http 里一个报文必须是完整交付，在处理大文件的时候就很不方便，所以就要分块，在 http 层面方便处理。</p> <p>chunked 主要是在 http 的层次来解决问题。</p></li> <li><p>客户端上传也可以使用 chunked、gzip，但不能用 range，注意这些字段的类型，只要是 <strong>实体字段</strong>，那就在请求响应里都可以用。</p></li> <li><p>分块传输、分段传输，用的一个 tcp 连接吗？</p> <p>一个 http 请求必定是在一个 tcp 连接里收发的，虽然是分块，但也是用一个 tcp，所以在范围请求的时候，可以使用多线程建立多个 tcp 连接获取，最后拼接起来原文件</p></li> <li><p>区分一个字段是什么类型？比如请求字段、响应字段还是通用字段</p> <p>rfc 里有说明，其次多看看 http 抓包就能熟悉，不需要刻意去记</p></li> <li><p><code>Transfer-Encoding: chunked</code> 表示分段传输，改成 <code>Transfer-Encoding: gzip</code> 以后会自动解压，分段传输的语意还在么</p> <p>看字段的值，没有 chunked，那就不是分块，只是压缩。</p> <p><code>Transfer-Encoding: chunked,gzip</code> 这样的多种组合理论上是可行的，但一般用的比较少。</p></li></ul> <iframe height="500px" width="100%" frameborder="0" allowfullscreen="allowfullscreen" src="/learn-book/ads.html"></iframe></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/abc0721/learn-book/edit/main/docs/http-protocol/04/02.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2022-07-21 21:38:52</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/learn-book/http-protocol/04/01.html" class="prev">
+        01 | 海纳百川：HTTP 的实体数据
+      </a></span> <span class="next"><a href="/learn-book/http-protocol/04/03.html">
+        03 | 排队也要讲效率：HTTP 的连接管理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/learn-book/assets/js/app.028ed7df.js" defer></script><script src="/learn-book/assets/js/2.21223788.js" defer></script><script src="/learn-book/assets/js/17.467198e5.js" defer></script><script src="/learn-book/assets/js/83.ec5af474.js" defer></script>
+  </body>
+</html>
