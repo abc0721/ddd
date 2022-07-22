@@ -2,6 +2,9 @@ const monitorTuningSc = require('../monitor-tuning')
 const httpProtocolSc = require('../http-protocol')
 const dddSc = require('../ddd')
 const cachePdpSc = require('../cache-pdp')
+const imoccDesignPatternGenSidebarConfig = require('../imocc/design_pattern')
+const designPatternGenSidebarConfig = require('../design_pattern')
+const middlegroundSc = require('../middle-office')
 
 module.exports = {
   // ~ 开发配置
@@ -94,7 +97,14 @@ module.exports = {
           text:'课程目录', items: [
             { text: 'JAVA 生产环境下性能监控与调优详解', link: '/monitor-tuning/' },
             { text: '透视 HTTP 协议', link: '/http-protocol/' },
-            { text: 'DDD 实战课', link: '/ddd/' }
+            { text: 'DDD 实战课', link: '/ddd/' },
+            { text: '说透中台', link: '/middle-office/' },
+            {
+              text: '设计模式', items: [
+                { text: '设计模式（慕课）', link: '/imocc/design_pattern/' },
+                { text: '研磨设计模式（李兴华）', link: '/design_pattern/' }
+              ]
+            }
           ]
        }
     ],
@@ -103,9 +113,15 @@ module.exports = {
       '/http-protocol/': httpProtocolSc(),
       '/ddd/': dddSc(),
       '/cache-pdp/': cachePdpSc(),
+       '/imocc/design_pattern/': imoccDesignPatternGenSidebarConfig(),
+      '/design_pattern/': designPatternGenSidebarConfig(),
+        '/middle-office/': middlegroundSc(),
     }
   },
   plugins: [
+    ['vuepress-plugin-baidu-tongji-analytics', {
+      key: 'b536d170ed239b225fdf6c847a14c342'
+    }],
     ['@vuepress/back-to-top', true],
     ['@vuepress/pwa', {
       serviceWorker: true,

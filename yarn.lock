@@ -7823,7 +7823,7 @@
   "resolved" "https://registry.npmmirror.com/vuepress-plugin-baidu-autopush/-/vuepress-plugin-baidu-autopush-1.0.1.tgz"
   "version" "1.0.1"
 
-"vuepress-plugin-baidu-tongji-analytics@^1.0.1":
+"vuepress-plugin-baidu-tongji-analytics@^1.0.2":
   "integrity" "sha512-nrlExfAGnLhnniLdK4XAup2o2ZeE/lGT8jLJMAmFCD7AvDvf6Dl2hZ6LSK/8lS0p7ByUUCY4NGagqeqLn8N5mQ=="
   "resolved" "https://registry.npmmirror.com/vuepress-plugin-baidu-tongji-analytics/-/vuepress-plugin-baidu-tongji-analytics-1.0.2.tgz"
   "version" "1.0.2"
